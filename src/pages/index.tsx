@@ -16,7 +16,7 @@ const Home = (): ReactNode => {
     },
     {
       id: 2,
-      name: "React",
+      name: "Junior",
     },
     {
       id: 3,
@@ -51,10 +51,10 @@ const Home = (): ReactNode => {
     const filterNames = new Set(filters.map((f) => f.name));
 
     setFilteredJobs(
-      jobs.filter(
-        (job) =>
-          job.tools.some((tool) => filterNames.has(tool)) ||
-          job.languages.some((lang) => filterNames.has(lang))
+      jobs.filter((job) =>
+        [...job.languages, ...job.tools, job.level, job.role].some((tool) =>
+          filterNames.has(tool)
+        )
       )
     );
   }, [filters, jobs]);
@@ -72,7 +72,7 @@ const Home = (): ReactNode => {
         className="flex flex-col gap-4 py-4"
         style={{ marginTop: `${filterHeight - 70}px` }}
       >
-        {filteredJobs.length > 0 ?
+        {filteredJobs.length > 0 ? (
           filteredJobs.map((item) => (
             <JobDetailCard
               key={item.id}
@@ -81,7 +81,10 @@ const Home = (): ReactNode => {
               highlights={filters}
               onClick={() => setSelectedJobId(item.id)}
             />
-          )): <EmptyJob />}
+          ))
+        ) : (
+          <EmptyJob />
+        )}
       </div>
     </div>
   );
