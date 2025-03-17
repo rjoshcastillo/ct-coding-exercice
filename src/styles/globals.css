@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@400;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Background Colors */
+  --bg-primary: hsl(187, 55%, 97%);
+  --bg-secondary: hsl(0, 0%, 100%);
+  --bg-tertiary: hsl(180, 29%, 50%);
+
+  /* Forground Colors */
+  --primary: hsl(180, 29%, 50%);
+  --light: hsl(0, 0%, 100%);
+  --dark:  hsl(180, 14%, 20%);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--primary);
+  font-family: 'Spartan', sans-serif;
+  font-size: 14px;
+}
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+.bg-tertiary { 
+  background-color: var(--bg-tertiary);
+}
+.text-primary {
+  color: var(--primary)
+}
+.text-secondary {
+  color: var(--light)
+}
+.text-dark {
+  color: var(--dark)
+}
+
+.selected-card {
+  border-color: var(--primary);
+}
+button {
+  cursor: pointer;
+}
+
+.close-filter:hover {
+  background-color: var(--dark);
+}
+
