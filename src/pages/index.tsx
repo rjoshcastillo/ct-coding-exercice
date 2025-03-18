@@ -61,16 +61,21 @@ const Home = (): ReactNode => {
   }, []);
 
   useEffect(() => {
-    const filterNames = new Set(filters.map((f) => f.name));
-
-    setFilteredJobs(
-      jobs.filter((job) =>
-        [...job.languages, ...job.tools, job.level, job.role].some((tool) =>
-          filterNames.has(tool)
+    if (filters.length === 0) {
+      setFilteredJobs(jobs);
+    } else {
+      const filterNames = new Set(filters.map((f) => f.name));
+  
+      setFilteredJobs(
+        jobs.filter((job) =>
+          [...job.languages, ...job.tools, job.level, job.role].some((tool) =>
+            filterNames.has(tool)
+          )
         )
-      )
-    );
+      );
+    }
   }, [filters, jobs]);
+  
 
   return (
     <div className="bg-primary relative">
