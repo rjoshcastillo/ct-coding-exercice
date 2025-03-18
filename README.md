@@ -3,15 +3,21 @@ git clone [<your-repository-link>](https://github.com/rjoshcastillo/ct-coding-ex
 cd <your-project-folder>(ct-coding-exercise)
 
 ## Install Dependencies
-For npm: npm install
-For yarn: yarn install
+```bash
+npm install
+# or
+yarn install
+```
 
 ## Run the Development Server
-For npm: npm run dev
-For yarn: yarn dev
+```bash
+npm run dev
+# or
+yarn dev
+```
 
 ## Access the Application
-http://localhost:3000
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
 ACTUAL RESULT
