@@ -53,7 +53,13 @@ const JobDetailCard = ({
             />
           )}
         </div>
-        <p className="text-lg font-bold">{jobDetail.position}</p>
+        <p
+          className={`${
+            isSelected ? "text-primary" : "text-dark"
+          } text-lg font-bold`}
+        >
+          {jobDetail.position}
+        </p>
         <div className="text-gray-500 text-sm flex gap-2">
           <div className="flex items-center gap-1">
             <span>{jobDetail.postedAt}</span>
