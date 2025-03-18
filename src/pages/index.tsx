@@ -1,6 +1,7 @@
 import EmptyJob from "@/components/layout/placeholder/EmptyJob";
 import FilterCard from "@/components/ui/cards/FilterCard";
 import JobDetailCard from "@/components/ui/cards/JobDetailCard";
+import JobCardSkeleton from "@/components/ui/loader/JobCardSkeleton";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
 const Home = (): ReactNode => {
@@ -9,6 +10,7 @@ const Home = (): ReactNode => {
   const [filterHeight, setFilterHeight] = useState(0);
   const filterRef = useRef<HTMLDivElement>(null);
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
+  const [loading, setIsLoading] = useState<boolean>(false);
   const [filters, setFilters] = useState<FilterType[]>([
     {
       id: 1,
@@ -41,10 +43,21 @@ const Home = (): ReactNode => {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/data/data.json");
+      const json = await res.json();
+      setJobs(json);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch("/data/data.json")
-      .then((res) => res.json())
-      .then((json) => setJobs(json));
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -72,7 +85,14 @@ const Home = (): ReactNode => {
         className="flex flex-col gap-4 py-4"
         style={{ marginTop: `${filterHeight - 70}px` }}
       >
-        {filteredJobs.length > 0 ? (
+        {/* Try throttling to see the loader */}
+        {loading ? (
+          <>
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+            <JobCardSkeleton />
+          </>
+        ) : filteredJobs.length > 0 ? (
           filteredJobs.map((item) => (
             <JobDetailCard
               key={item.id}
